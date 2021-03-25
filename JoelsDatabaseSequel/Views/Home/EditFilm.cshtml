@@ -1,0 +1,162 @@
+﻿<!--Parker Mecham, Section 1-->
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add Movies";
+    ViewBag.h1 = "Add a film to Joel's Database";
+}
+@model Film
+<!--Style for the form-->
+<style>
+    input[type=text], input[type=number], select {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    button[type=submit] {
+        width: 100%;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        button[type=submit]:hover {
+            background-color: #45a049;
+        }
+
+    form {
+        border-radius: 5px;
+        background-color: #f2f2f2;
+        padding: 20px;
+    }
+</style>
+
+
+<h2>
+    Enter the info for the film you want to edit below:
+</h2>
+
+
+
+<div asp-validation-summary="All"></div>
+<br />
+
+
+<!--This form allows users to add movies to the database-->
+<form asp-action="EditFilm" method="post">
+
+    <div>
+
+        <!--These razor code lines will display the error message associated with their field if they aren't entered correctly-->
+        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Category">Category: </label>
+        <input default="@Model.Category" asp-for="Category" />
+
+    </div>
+
+    <!--Movie Title-->
+    <div>
+
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Title">Title: </label>
+        <input default="@Model.Title" asp-for="Title" />
+    </div>
+
+    <!--Year-->
+    <div>
+
+        @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Year">Year: </label>
+        <input default="@Model.Year" asp-for="Year" />
+
+    </div>
+
+    <!--Director-->
+    <div>
+
+        @Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Director">Director: </label>
+        <input default="@Model.Director" asp-for="Director" />
+    </div>
+
+    <!--Rating-->
+    <div>
+
+        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Rating">Rating: </label>
+        <select default="@Model.Rating" asp-for="Rating">
+
+            <option value="">Select One</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+
+        </select>
+
+    </div>
+
+    <!--Edited-->
+    <div>
+
+        @Html.ValidationMessageFor(model => model.Edited, "", new { @class = "text-danger" })
+
+        <label asp-for="Edited"> Is this film edited? </label>
+
+        <select default="@Model.Edited"  asp-for="Edited">
+
+            <option value="">Select One</option>
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+
+        </select>
+    </div>
+
+    <!--Lent to: -->
+    <div>
+
+        <label asp-for="LentTo">Lent To: </label>
+        <input default="@Model.LentTo" asp-for="LentTo" />
+
+    </div>
+
+    <!--Notes: -->
+    <div>
+
+        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+
+        <label asp-for="Notes">Notes: </label>
+        <input default="@Model.Notes" asp-for="Notes" />
+
+    </div>
+
+    <br />
+
+    <!--Sets the film Id equal to the Film Id of the currently selected film-->
+    <div>
+        <input asp-for="FilmId" type="hidden" value="@Model.FilmId" />
+    </div>
+    <!--This button submits the form-->
+    <button type="submit">Submit Your Entry</button>
+
+</form>

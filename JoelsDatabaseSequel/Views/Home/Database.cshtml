@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Movie Database";
+}
+@model FilmListViewModel
+
+    
+
+    <h1>@ViewData["Title"]</h1>
+
+
+    <div>
+        <h2>
+            These are the movies that have been added to the database as of right now.
+        </h2>
+    </div>
+
+    <div class="text-center">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr><th>Category</th><th>Title</th><th>Year</th><th>Director</th><th>Rating</th><th>Edited</th><th>Lent to</th><th>Notes</th><th>Remove</th><th>Edit</th></tr>
+            </thead>
+
+            <tbody>
+                <!--This loop iterates through the model and gets all of the information that was entered in and adds it to the table-->
+                @foreach (var x in Model.Films)
+                {
+                <tr>
+                    <td>@x.Category</td>
+                    <td>@x.Title</td>
+                    <td>@x.Year</td>
+                    <td>@x.Director</td>
+                    <td>@x.Rating</td>
+                    <td>@x.Edited</td>
+                    <td>@x.LentTo</td>
+                    <td>@x.Notes</td>
+                    <td>
+                        <form method="post" asp-action="RemoveFilm" asp-controller="Home">
+                            <input type="hidden" asp-for="@x.FilmId" name="FilmId" value="@x.FilmId" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="get" asp-action="EditFilm" asp-controller="Home">
+                            <input type="hidden" asp-for="@x.FilmId" name="FilmId" value="@x.FilmId" />
+                            <button type="submit" class="btn btn-info">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>

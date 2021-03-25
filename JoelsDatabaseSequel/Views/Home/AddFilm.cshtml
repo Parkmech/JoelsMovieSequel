@@ -1,0 +1,116 @@
+﻿<!--Parker Mecham, Section 1-->
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add Movies";
+    ViewBag.h1 = "Add a film to Joel's Database";
+}
+@model Film
+<h2>
+    Enter the info for the film you want to add below:
+</h2>
+
+<!--This form allows users to add movies to the database-->
+<form style="margin:auto" class="col-7" asp-action="AddFilm" method="post">
+
+    <div class="form-group">
+
+        <!--These razor code lines will display the error message associated with their field if they aren't entered correctly-->
+        @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Category">Category: </label>
+        <input class="form-control" asp-for="Category" />
+
+    </div>
+
+    <!--Movie Title-->
+    <div class="form-group">
+
+        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Title">Title: </label>
+        <input class="form-control" asp-for="Title" />
+    </div>
+
+    <!--Year-->
+    <div class="form-group">
+
+        @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Year">Year: </label>
+        <input class="form-control" asp-for="Year" />
+
+    </div >
+
+    <!--Director-->
+    <div class="form-group">
+
+        @Html.ValidationMessageFor(model => model.Director, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Director">Director: </label>
+        <input class="form-control" asp-for="Director" />
+    </div>
+
+    <!--Rating-->
+    <div class="form-group">
+
+        @Html.ValidationMessageFor(model => model.Rating, "", new { @class = "text-danger" })
+        <br />
+
+        <label asp-for="Rating">Rating: </label>
+        <select class="form-control" asp-for="Rating">
+
+            <option value="">Select One</option>
+            <option value="G">G</option>
+            <option value="PG">PG</option>
+            <option value="PG-13">PG-13</option>
+            <option value="R">R</option>
+
+        </select>
+    </div>
+    <br />
+    <!--Edited-->
+    <div class="form-group">
+
+        @Html.ValidationMessageFor(model => model.Edited, "", new { @class = "text-danger" })
+
+        <label asp-for="Edited"> Is this film edited? </label>
+
+        <select class="form-control" asp-for="Edited">
+
+            <option value="">Select One</option>
+            <option value="True">Yes</option>
+            <option value="False">No</option>
+
+        </select>
+    </div>
+
+    <!--Lent to: -->
+    <div class="form-group">
+
+        <label asp-for="LentTo">Lent To: </label>
+        <input class="form-control" asp-for="LentTo" />
+
+    </div>
+
+    <!--Notes: -->
+    <div class="form-group">
+
+        @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
+
+        <label asp-for="Notes">Notes: </label>
+        <input class="form-control" asp-for="Notes" />
+
+    </div>
+
+    <br />
+
+    <!--This button submits the form-->
+    <button class ="btn btn-info" type="submit">Submit Your Entry</button>
+
+</form>
